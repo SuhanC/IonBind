@@ -18,6 +18,8 @@ Hybrid
 
 Representation
 > https://ieeexplore.ieee.org/document/9477085
+> https://github.com/sacdallago/bio_embeddings
 
 Review
 > https://reader.elsevier.com/reader/sd/pii/S2001037022002185?token=5E4D50B3BD3CA49D6CDE558EB6620782F302E16D521B5DC91FC469AB46C4D724EDE192A925B7F591D3577CF5B6D717E1&originRegion=us-east-1&originCreation=20220801025958
+

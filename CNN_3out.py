@@ -10,9 +10,10 @@ class CNN2Layers(torch.nn.Module):
                             stride=stride, padding=padding),
             torch.nn.ELU(),
             torch.nn.Dropout(dropout),
-
-            torch.nn.Conv1d(in_channels=feature_channels, out_channels=3, kernel_size=kernel_size,
+            #output 30 channel to represent all possible metal ions
+            torch.nn.Conv1d(in_channels=feature_channels, out_channels=30, kernel_size=kernel_size,
                             stride=stride, padding=padding),
+            
         )
 
     def forward(self, x):
