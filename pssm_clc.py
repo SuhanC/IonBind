@@ -148,6 +148,8 @@ def dl_bxml_dataset(dataset, save_path):
                 except:
                     print("Failed to download protein %s! Try agian." % (protein_name))
             print("%d/%d - XML file of Protein %s downloaded... " % (i + 1,num_protien, protein_name))
+
+            
 def m_thread_dl_bxml(dataset, input_file, save_path, no_workers=1):
     """
     It download BLAST XML files using multi-threading with Queue
