@@ -14,7 +14,8 @@ Structure-based
 
 Hybrid
 > https://academic.oup.com/bioinformatics/article/36/10/3018/5753946
-
+> https://github.com/Singh-Lab/dSPRINT
+>
 
 Representation
 > https://ieeexplore.ieee.org/document/9477085
