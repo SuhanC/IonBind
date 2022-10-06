@@ -14,6 +14,7 @@ def get_PSSM_mat(file):
         pssm_line = test[i].split('  ')
         pssm_line = [l.strip() for l in pssm_line if l!='']
         matrix_1 = pssm_line[0:21]
+        matrix_1 = [matrix_1[i].split(' ')[0]if i!=0 else matrix_1[i] for i in range(len(matrix_1))]
         matrix_2 = pssm_line[21:41]
         pssm_lst.append(matrix_1)
 
@@ -24,3 +25,7 @@ def get_PSSM_mat(file):
     pssm['Residue'] =[r.split(' ')[1] for r in pssm['Residue'].tolist()]
     pssm.set_index('Residue',inplace = True)
     return(pssm)
+
+
+
+# get_PSSM_mat(testfile)

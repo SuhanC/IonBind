@@ -71,6 +71,7 @@ def get_h_bond(sequence):
         'V': 0.93,
         'W': 1.83,
         'Y': 2.00,
+        'X': 0.0,
         '*': 0.0
 
     }
@@ -96,6 +97,7 @@ def get_h_bond(sequence):
         'V': 1.11,
         'W': 1.21,
         'Y': 1.68,
+        'X': 0.0,
         '*': 0.0
     }
     result_donor=[aa_h_bond_donor[s] for s in sequence]
