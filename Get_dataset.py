@@ -12,7 +12,8 @@ def get_dataset(test_pssm,binding_sites):
     pos_label=[]
     for i in range(len(binding_sites)):
         b_site = binding_sites.Position.tolist()[i]
-        pos_label.append(test_pssm.iloc[b_site-4 : b_site+5,:].astype(float))
+        windowed = test_pssm.iloc[b_site-4 : b_site+5,:].astype(float)
+        pos_label.append(windowed)
 
     neg_label=[]
     nb_site = list(range(len(test_pssm)))
