@@ -25,7 +25,3 @@ def get_PSSM_mat(file):
     pssm['Residue'] =[r.split(' ')[1] for r in pssm['Residue'].tolist()]
     pssm.set_index('Residue',inplace = True)
     return(pssm)
-
-
-
-# get_PSSM_mat(testfile)

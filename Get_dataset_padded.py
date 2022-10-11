@@ -6,8 +6,7 @@ def get_binding_site(bind_tsv,protname):
     binding_sites = bindinfo[bindinfo.Accession==protname]
     binding_sites = binding_sites.drop_duplicates(subset = ['Accession','Name'])
     return(binding_sites)
-
-def get_dataset(test_pssm,binding_sites):
+def get_dataset_padded(test_pssm,binding_sites):
     pos_label=[]
     for i in range(len(binding_sites)):
         b_site = binding_sites.Position.tolist()[i]
