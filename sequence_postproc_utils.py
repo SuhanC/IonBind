@@ -12,7 +12,7 @@ def get_charge(sequence):
     return(transformed_seq)
 
 def get_func_group(sequence):
-    polar=['C','N','P','Q','S','T']
+    polar=['C','N','P','Q','S','T','U']
     alipathic=['A','G','I','L','M','V']
     aromatic=['F','W','Y']
     negative=['D','E']
@@ -38,7 +38,7 @@ def get_hydro(sequence):
     return(transformed_seq)
 
 def get_volume(sequence):
-    tiny = ['A','C','G','S']
+    tiny = ['A','C','G','S','U']
     small = ['D','N','P','T','V']
     big = ['E','F','H','I','K','L','M','Q','R','W','Y']
     def get_func_representation(sequence,group_idx):
@@ -72,7 +72,8 @@ def get_h_bond(sequence):
         'W': 1.83,
         'Y': 2.00,
         'X': 0.0,
-        '*': 0.0
+        '*': 0.0,
+        'U': 0.0
 
     }
 
@@ -98,7 +99,9 @@ def get_h_bond(sequence):
         'W': 1.21,
         'Y': 1.68,
         'X': 0.0,
-        '*': 0.0
+        '*': 0.0,
+        'U': 0.0
+
     }
     result_donor=[aa_h_bond_donor[s] for s in sequence]
     result_acceptor=[aa_h_bond_acceptor[s] for s in sequence]
