@@ -10,7 +10,7 @@ def get_binding_site(bind_tsv,protname):
 
 def get_binding_site_multi(bind_tsv,protname):
     binding_sites = bind_tsv[bind_tsv.Accession==protname]
-    binding_sites = binding_sites.drop_duplicates(subset = ['Accession','Target'])
+    binding_sites = binding_sites.drop_duplicates(subset = ['Accession','Target','Position'])
     return(binding_sites)
 
 
