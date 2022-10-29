@@ -1,3 +1,8 @@
+import pandas as pd
+import os
+import numpy as np
+
+
 def get_charge(sequence):
     transformed_seq=[]
     positive=['K','R']
@@ -114,8 +119,8 @@ def get_h_bond(sequence):
     result_acceptor=[aa_h_bond_acceptor[s] for s in sequence]
     return([result_donor,result_acceptor])
     
-def get_PSSM_mat(file):
-    test = open(file,'r').readlines()
+def get_PSSM_mat(pssm_file):
+    test = open(pssm_file,'r').readlines()
 
     aa_cols=['Residue','A', ' R', ' N', ' D', ' C', ' Q', ' E', ' G', ' H', ' I', ' L', ' K', ' M', ' F', ' P', ' S', ' T', ' W', ' Y', ' V']
 
@@ -138,25 +143,45 @@ def get_PSSM_mat(file):
 
 
 def get_processed_pssm(pssm_mat):
-    test_pssm = get_PSSM_mat(pssm_file)
-    test_seq = ''.join(test_pssm.index.tolist())
-    test_pssm['Charge']=get_charge(test_seq)
-    test_pssm['Hydro']=get_hydro(test_seq)
+    test_seq = ''.join(pssm_mat.index.tolist())
+    pssm_mat['Charge']=get_charge(test_seq)
+    pssm_mat['Hydro']=get_hydro(test_seq)
 
-    test_pssm['Func_polar']=get_func_group(test_seq)[0]
-    test_pssm['Func_alipathic']=get_func_group(test_seq)[1]
-    test_pssm['Func_aromatic']=get_func_group(test_seq)[2]
-    test_pssm['Func_negative']=get_func_group(test_seq)[3]
-    test_pssm['Func_positive']=get_func_group(test_seq)[4]
+    pssm_mat['Func_polar']=get_func_group(test_seq)[0]
+    pssm_mat['Func_alipathic']=get_func_group(test_seq)[1]
+    pssm_mat['Func_aromatic']=get_func_group(test_seq)[2]
+    pssm_mat['Func_negative']=get_func_group(test_seq)[3]
+    pssm_mat['Func_positive']=get_func_group(test_seq)[4]
 
-    test_pssm['Volume_tiny']=get_volume(test_seq)[0]
-    test_pssm['Volume_small']=get_volume(test_seq)[1]
-    test_pssm['Volume_big']=get_volume(test_seq)[2]
+    pssm_mat['Volume_tiny']=get_volume(test_seq)[0]
+    pssm_mat['Volume_small']=get_volume(test_seq)[1]
+    pssm_mat['Volume_big']=get_volume(test_seq)[2]
 
-    test_pssm['HBdonor']=get_h_bond(test_seq)[0]
-    test_pssm['HBacceptor']=get_h_bond(test_seq)[1]
-    return(test_pssm)
- 
+    pssm_mat['HBdonor']=get_h_bond(test_seq)[0]
+    pssm_mat['HBacceptor']=get_h_bond(test_seq)[1]
+    return(pssm_mat)
 
+def process_binddata(bind_filepath):
+    bind_tsv_list = [bind_filepath + f for f in os.listdir(bind_filepath)]
+    bindlist = pd.concat([pd.read_table(f) for f in bind_tsv_list])
+    bindlist['Name'] = pd.Categorical(bindlist.Name)
+    bindlist['Target'] = bindlist.Name.cat.codes
+    return(bindlist)
 
- 
+def get_label(accession,infile,mode,bind_tsv):
+    if mode=='positive':
+        sequence_fasta = open(infile,'r').readlines()[0]
+        bindset = bind_tsv[bind_tsv.Accession==accession].sort_values('Position')
+
+        if len(bindset)!=0:
+            label = np.zeros(len(sequence_fasta),dtype = int)
+            for i in range(len(bindset)):
+                pos = bindset.Position.tolist()[i]-1
+                label[pos] = pos
+            label = ''.join(label.astype(str))
+        else : 
+            label = np.NaN
+    elif mode=='negative':
+        sequence_fasta = open(infile,'r').readlines()[0]
+        label = '0'*len(sequence_fasta)
+    return(accession,label)

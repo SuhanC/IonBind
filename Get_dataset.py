@@ -2,7 +2,6 @@ import pandas as pd
 import random
 
 def get_binding_site(bind_tsv,protname):
-    # bindinfo = pd.read_table('/Users/suhancho/data/Uniprot_metalbinding_challenge/chebi/Zn(2+).tsv',sep='\t')
     bindinfo = pd.read_table(bind_tsv,sep='\t')
     binding_sites = bindinfo[bindinfo.Accession==protname]
     binding_sites = binding_sites.drop_duplicates(subset = ['Accession','Name'])
@@ -12,7 +11,6 @@ def get_binding_site_multi(bind_tsv,protname):
     binding_sites = bind_tsv[bind_tsv.Accession==protname]
     binding_sites = binding_sites.drop_duplicates(subset = ['Accession','Target','Position'])
     return(binding_sites)
-
 
 def get_dataset(test_pssm,binding_sites):
     pos_label=[]
