@@ -174,14 +174,13 @@ def get_label(accession,infile,mode,bind_tsv):
         bindset = bind_tsv[bind_tsv.Accession==accession].sort_values('Position')
 
         if len(bindset)!=0:
-            label = np.zeros(len(sequence_fasta),dtype = int)
+            label=['0']*len(sequence_fasta)
             for i in range(len(bindset)):
                 pos = bindset.Position.tolist()[i]-1
-                label[pos] = pos
-            label = ''.join(label.astype(str))
+                label[pos] = bindset.Target.tolist()[i]
         else : 
             label = np.NaN
     elif mode=='negative':
         sequence_fasta = open(infile,'r').readlines()[0]
-        label = '0'*len(sequence_fasta)
-    return(accession,label)
+        label = ['29']*len(sequence_fasta)
+    return(label)
