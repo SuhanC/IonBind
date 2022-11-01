@@ -130,7 +130,7 @@ def get_PSSM_mat(pssm_file):
         pssm_line = [l.strip() for l in pssm_line if l!='']
         matrix_1 = pssm_line[0:21]
         matrix_1 = [matrix_1[i].split(' ')[0]if i!=0 else matrix_1[i] for i in range(len(matrix_1))]
-        matrix_2 = pssm_line[21:41]
+        matrix_2 = pssm_line[21:41] # Not using this matrix
         pssm_lst.append(matrix_1)
 
     pssm = pd.DataFrame(pssm_lst)
