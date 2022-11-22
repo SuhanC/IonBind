@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 
+
 inpath='/Users/suhancho/data/Uniprot_metalbinding_challenge/PSSM/'
 files = [inpath + f for f in os.listdir(inpath)]
 
