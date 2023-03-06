@@ -1,4 +1,8 @@
 # IonBind
+![Model Structure](https://github.com/SuhanC/IonBind/blob/main/IonBind.png?raw=true)
+
+
+
 
 Reference papers
 
