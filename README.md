@@ -1,5 +1,5 @@
 # IonBind
-
+- Update: At 2023.09.28, I won 2nd place at UniProt Metal Binding Site Challenge! 
 ## Materials and methods
 
 Protein Sequence Data Processing
